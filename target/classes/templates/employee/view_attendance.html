@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Attendance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-10">
+
+<div class="w-full max-w-3xl bg-white shadow-md rounded-xl p-8">
+    <h2 class="text-2xl font-semibold text-gray-700 text-center mb-6">My Attendance</h2>
+
+    <table class="table-auto w-full border border-gray-300 rounded-md mb-6">
+        <thead class="bg-gray-200 text-gray-600">
+        <tr>
+            <th class="p-2 border">Date</th>
+            <th class="p-2 border">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="att : ${attendanceList}" class="text-center">
+            <td class="p-2 border" th:text="${att.date}">2025-08-03</td>
+            <td class="p-2 border" th:text="${att.status}">Present</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mb-4">
+        <h3 class="text-xl font-medium text-gray-700 mb-2">Mark Today's Attendance</h3>
+        <form th:action="@{/employee/attendance}" method="post" class="flex gap-4">
+            <select name="status" class="border px-3 py-2 rounded-md w-40">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+            <button type="submit"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <div class="text-center mt-6">
+        <a th:href="@{/logout}" class="text-indigo-600 hover:underline">Logout</a>
+    </div>
+</div>
+
+</body>
+</html>
